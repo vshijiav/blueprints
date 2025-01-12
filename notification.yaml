@@ -16,30 +16,27 @@ blueprint:
     message_body:
       name: Notification Message
       description: Body of the notification message.
-      
 
-defaults: {}
-
-trigger_type:
-  name: Trigger Type
-  description: Type of trigger to use for this automation.
-  selector:
-    select:
-      options:
-        - numeric_state
-        - state
-trigger_from:
-  name: Trigger From State
-  description: Initial state for the state trigger (only used if trigger type is state).
-  default: ''
-trigger_to:
-  name: Trigger To State
-  description: Target state for the state trigger (only used if trigger type is state).
-  default: ''
-trigger_below:
-  name: Numeric Below Value
-  description: Value below which the numeric_state trigger activates (only used if trigger type is numeric_state).
-  default: 1
+    trigger_type:
+      name: Trigger Type
+      description: Type of trigger to use for this automation.
+      selector:
+        select:
+          options:
+            - numeric_state
+            - state
+    trigger_from:
+      name: Trigger From State
+      description: Initial state for the state trigger (only used if trigger type is state).
+      default: ''
+    trigger_to:
+      name: Trigger To State
+      description: Target state for the state trigger (only used if trigger type is state).
+      default: ''
+    trigger_below:
+      name: Numeric Below Value
+      description: Value below which the numeric_state trigger activates (only used if trigger type is numeric_state).
+      default: 1
 
 condition:
   - condition: template
