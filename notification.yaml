@@ -1,0 +1,60 @@
+blueprint:
+  name: Notification Blueprint
+  description: Sends fixed notifications.
+  domain: automation
+  input:
+    washer_sensor:
+      name: notification sensor
+      description: Entity ID
+      selector:
+        entity:
+          domain: sensor
+    message_title:
+      name: Notification Title
+      description: Title of the notification message.
+      
+    message_body:
+      name: Notification Message
+      description: Body of the notification message.
+      
+
+defaults: {}
+
+trigger:
+  - platform: numeric_state
+    entity_id: !input washer_sensor
+    below: 1
+
+condition:
+  - condition: template
+    value_template: "{{ trigger.from_state.state not in ['unknown', 'unavailable'] }}"
+
+action:
+  - parallel:
+      - service: notify.mobile_app_jia
+        data:
+          message: !input message_body
+          title: !input message_title
+      - service: notify.mobile_app_xujie_de_iphone
+        data:
+          message: !input message_body
+          title: !input message_title
+      - service: notify.alexa_media_jia_s_echo_dot
+        data:
+          message: !input message_body
+          title: !input message_title
+      - service: notify.alexa_media_kitchen_alexa
+        data:
+          message: !input message_body
+          title: !input message_title
+      - service: notify.alexa_media_living_room_alexa
+        data:
+          message: !input message_body
+          title: !input message_title
+      - service: notify.alexa_media_bedroom_alexa
+        data:
+          message: !input message_body
+          title: !input message_title
+
+mode: single
+
